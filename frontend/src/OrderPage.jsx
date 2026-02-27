@@ -4,13 +4,12 @@ import "./OrderPage.css";
 
 function OrderPage() {
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [quantity, setQuantity] = useState(1); // Add quantity input
   const navigate = useNavigate();
   const location = useLocation();
-
-  // ✅ Get product from BuyNow button
   const product = location.state?.product;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!product) {
@@ -18,34 +17,35 @@ function OrderPage() {
       return;
     }
 
-    // Generate delivery date
-    const days = Math.floor(Math.random() * 3) + 2;
-    const delivery = new Date();
-    delivery.setDate(delivery.getDate() + days);
+    const userId = 1; // Replace with logged-in user id if available
 
-    // ✅ Correct Order Object
-    const newOrder = {
-      id: Date.now(),
-      name: product.name,
-      image: product.image,   // ⭐⭐⭐ MOST IMPORTANT
-      paymentMethod: paymentMethod,
-      orderDate: new Date().toDateString(),
-      deliveryDate: delivery.toDateString(),
+    const orderRequest = {
+      userId: userId,
+      productId: product.id,
+      quantity: quantity,
+      productName: product.title,
+      productImage: product.image 
     };
 
-    // Get existing orders
-    const existingOrders =
-      JSON.parse(localStorage.getItem("orders")) || [];
+    try {
+      const response = await fetch("http://localhost:8080/api/orders/buyNow", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderRequest)
+      });
 
-    // Add new order
-    existingOrders.push(newOrder);
+      if (!response.ok) throw new Error("Failed to place order");
 
-    // Save
-    localStorage.setItem("orders", JSON.stringify(existingOrders));
+      const savedOrder = await response.json();
+      console.log("Order saved:", savedOrder);
 
-    alert("Order Placed Successfully!");
+      alert("Order Placed Successfully!");
+      navigate("/your-orders");
 
-    navigate("/your-orders");
+    } catch (err) {
+      console.error(err);
+      alert("Error placing order. Check console.");
+    }
   };
 
   return (
@@ -53,20 +53,26 @@ function OrderPage() {
       <div className="order-container">
         <h2>Order Details</h2>
 
-        {/* ✅ Show Product Preview */}
         {product && (
           <div style={{ textAlign: "center", marginBottom: "20px" }}>
-            <img
-              src={product.image}
-              alt={product.name}
-              style={{ width: "150px" }}
-            />
-            <h4>{product.name}</h4>
+            <img src={product.image} alt={product.title} style={{ width: "150px" }} />
+            <h4>{product.title}</h4>
+            <p>Price: ₹{product.price}</p>
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="order-form">
-          
+          <div className="form-group">
+            <label>Quantity</label>
+            <input
+              type="number"
+              value={quantity}
+              min="1"
+              onChange={(e) => setQuantity(parseInt(e.target.value))}
+              required
+            />
+          </div>
+
           <div className="form-group">
             <label>Full Name</label>
             <input type="text" placeholder="Enter your name" required />
@@ -84,37 +90,18 @@ function OrderPage() {
 
           <div className="payment-section">
             <h3>Payment Method</h3>
-
-            <label>
-              <input
-                type="radio"
-                name="payment"
-                value="Cash on Delivery"
-                onChange={(e) => setPaymentMethod(e.target.value)}
-                required
-              />
-              Cash on Delivery
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="payment"
-                value="UPI"
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-              UPI
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="payment"
-                value="Card"
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-              Card
-            </label>
+            {["Cash on Delivery", "UPI", "Card"].map((method) => (
+              <label key={method}>
+                <input
+                  type="radio"
+                  name="payment"
+                  value={method}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  required
+                />
+                {method}
+              </label>
+            ))}
           </div>
 
           <button className="place-order-btn" type="submit">
