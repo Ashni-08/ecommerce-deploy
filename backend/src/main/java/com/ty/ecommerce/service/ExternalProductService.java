@@ -2,6 +2,8 @@ package com.ty.ecommerce.service;
 
 import com.ty.ecommerce.entity.Product;
 import com.ty.ecommerce.repository.ProductRepository;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,8 +26,14 @@ public class ExternalProductService {
 
         // 1. Fetch from DummyJSON
         try {
-            Map<String, Object> dummyRes = restTemplate.getForObject("https://dummyjson.com/products?limit=50",
-                    Map.class);
+            Map<String, Object> dummyRes = restTemplate.exchange(
+                    "https://dummyjson.com/products?limit=50",
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<Map<String, Object>>() {
+                    }).getBody();
+
+            @SuppressWarnings("unchecked")
             List<Map<String, Object>> dummyProducts = (List<Map<String, Object>>) dummyRes.get("products");
             for (Map<String, Object> p : dummyProducts) {
                 Product product = new Product();
@@ -43,8 +51,12 @@ public class ExternalProductService {
 
         // 2. Fetch from FakeStoreAPI
         try {
-            List<Map<String, Object>> fakeProducts = restTemplate.getForObject("https://fakestoreapi.com/products",
-                    List.class);
+            List<Map<String, Object>> fakeProducts = restTemplate.exchange(
+                    "https://fakestoreapi.com/products",
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<Map<String, Object>>>() {
+                    }).getBody();
             for (Map<String, Object> p : fakeProducts) {
                 Product product = new Product();
                 product.setTitle((String) p.get("title"));

@@ -8,7 +8,7 @@
 
 .orders-container {
   max-width: 1000px;
-  margin: 0 auto ;
+  margin: 0 auto;
   margin-top: 100px;
 }
 
@@ -17,6 +17,7 @@
   margin-bottom: 20px;
   background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
