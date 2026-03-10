@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8081/api/users";
+const BASE_URL = "https://ecommerce-deploy-production.up.railway.app/api/users";
 
 // REGISTER
 export const registerUser = async (data) => {
