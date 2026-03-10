@@ -4,7 +4,7 @@ import "./OrderPage.css";
 
 function OrderPage() {
   const [paymentMethod, setPaymentMethod] = useState("");
-  const [quantity, setQuantity] = useState(1); // Add quantity input
+  const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const location = useLocation();
   const product = location.state?.product;
@@ -35,7 +35,7 @@ function OrderPage() {
     };
 
     try {
-      const response = await fetch("http://localhost:8081/api/orders/buyNow", {
+      const response = await fetch("https://ecommerce-deploy-production.up.railway.app/api/orders/buyNow", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderRequest)

@@ -117,7 +117,7 @@ function Product() {
     let url = ''
     if (source === 'dummy') url = `https://dummyjson.com/products/${id}`
     else if (source === 'fake') url = `https://fakestoreapi.com/products/${id}`
-    else if (source === 'local') url = `http://localhost:8081/api/products/${id}`
+    else if (source === 'local') url = `https://ecommerce-deploy-production.up.railway.app/api/products/${id}`
     else { setLoading(false); return }
 
     axios.get(url)
@@ -202,7 +202,6 @@ function Product() {
             <YourRating />
 
             <div className="btn-box">
-              {/* <QuantitySelector quantity={quantity} setQuantity={setQuantity} maxStock={product.stock} /> */}
               <BuynowBtn product={product} quantity={quantity} />
               <div onClick={handleAddToCart}>
                 <StatusButton product={product} quantity={quantity} />

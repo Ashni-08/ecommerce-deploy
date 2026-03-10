@@ -3,7 +3,7 @@ import axios from 'axios';
 import './AdminDashboard.css';
 import { useNavigate, Link } from 'react-router-dom';
 
-const API_BASE_URL = "http://localhost:8081/api/products";
+const API_BASE_URL = "https://ecommerce-deploy-production.up.railway.app/api/products";
 
 function AdminDashboard() {
     const [products, setProducts] = useState([]);

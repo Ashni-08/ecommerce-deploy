@@ -45,7 +45,7 @@ function Home() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const localRes = await axios.get("http://localhost:8081/api/products")
+        const localRes = await axios.get("https://ecommerce-deploy-production.up.railway.app/api/products")
         const allProducts = localRes.data.map(p => ({
           ...p,
           source: "local"
@@ -60,7 +60,6 @@ function Home() {
   }, [])
 
 
-  // ✅ Search function
   const handleSearch = (text) => {
     setSearchText(text)
 
@@ -72,17 +71,13 @@ function Home() {
   }
 
 
-  // ✅ Get padding based on screen size + search state
   const getPaddingTop = () => {
     const w = window.innerWidth
 
-    // 📱 MOBILE — screens smaller than 768px
     if (w <= 767) return searchText ? "150px" : "30px"
 
-    // 📲 TABLET — screens between 768px and 1024px
     if (w <= 1023) return searchText ? "140px" : "40px"
 
-    // 🖥️ DESKTOP — screens larger than 1024px
     return searchText ? "70px" : "30px"
   }
 
