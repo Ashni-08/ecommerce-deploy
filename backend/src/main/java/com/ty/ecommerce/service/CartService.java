@@ -19,7 +19,7 @@ public class CartService {
     // Add product to cart
     public Cart addToCart(Cart cart) {
 
-        cart.setId(null); // ⭐ VERY IMPORTANT
+        cart.setId(null);
 
         return cartRepository.save(cart);
     }
