@@ -61,16 +61,13 @@ This is a full-stack e-commerce web application where users can browse products,
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home](./images/home.png)
+![Home](./frontend/images/home.png)
 
 ### 🛒 Cart Page
-![Cart](./images/cart.png)
+![Cart](./frontend/images/cart.png)
 
 ### ⚙️ Admin Dashboard
-![Admin](./images/admin.png)
-
----
-
+![Admin](./frontend/images/admin.png)
 ## 🔐 Authentication & Authorization
 - Role-based access (Admin/User)  
 - Protected admin routes  
