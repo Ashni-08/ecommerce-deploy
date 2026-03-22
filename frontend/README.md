@@ -1,16 +1,86 @@
-# React + Vite
+# 🛒 E-commerce Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🔗 Live Demo
+https://ecommerce-deploy-tawny.vercel.app/
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Project Overview
+This is a full-stack e-commerce web application where users can browse products, add items to cart, and place orders. It also includes a secure admin dashboard for managing products.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Features
 
-## Expanding the ESLint configuration
+### 👤 User Features
+- User Registration & Login  
+- Browse Products  
+- View Product Details  
+- Add to Cart  
+- Place Orders  
+- View Order History  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### ⚙️ Admin Features
+- Secure Admin Dashboard (role-based access)  
+- Add New Products  
+- Edit Existing Products  
+- Delete Products  
+- Import External Products  
+
+---
+
+## 🔐 Demo Credentials
+
+### 👨‍💼 Admin Access
+- Username: **admin**  
+- Password: **12345**  
+
+> Use these credentials to access the admin dashboard at `/admin`
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend:**
+- React (Vite)
+- HTML, CSS, JavaScript
+
+**Backend:**
+- Spring Boot
+- REST APIs
+
+**Database:**
+- MySQL
+
+**Deployment:**
+- Vercel (Frontend)
+- Railway (Backend)
+
+---
+
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Home](./images/home.png)
+
+### 🛒 Cart Page
+![Cart](./images/cart.png)
+
+### ⚙️ Admin Dashboard
+![Admin](./images/admin.png)
+
+---
+
+## 🔐 Authentication & Authorization
+- Role-based access (Admin/User)  
+- Protected admin routes  
+- Local storage-based session handling  
+
+---
+
+## 📦 Run Locally
+
+### Frontend
+```bash
+npm install
+npm run dev
